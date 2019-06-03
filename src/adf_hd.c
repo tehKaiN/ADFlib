@@ -527,7 +527,7 @@ RETCODE adfCreateHdHeader(struct Device* dev, int n, struct Partition** partList
         part.blocksPerTrack = dev->sectors;
 		part.lowCyl = partList[i]->startCyl;
 		part.highCyl = partList[i]->startCyl + partList[i]->lenCyl -1;
-        strncpy(part.dosType, "DOS", 3);
+        memcpy(part.dosType, "DOS", 3);
 
         part.dosType[3] = partList[i]->volType & 0x01;
 			
@@ -538,7 +538,7 @@ RETCODE adfCreateHdHeader(struct Device* dev, int n, struct Partition** partList
 
     /* FSHD */
 
-    strncpy(fshd.dosType,"DOS",3);
+    memcpy(fshd.dosType,"DOS",3);
     fshd.dosType[3] = partList[0]->volType;
 	fshd.next = -1;
 	fshd.segListBlock = j+1;
@@ -743,14 +743,14 @@ adfWriteRDSKblock(struct Device *dev, struct bRDSKblock* rdsk)
 
     memset(buf,0,LOGICAL_BLOCK_SIZE);
 
-    strncpy(rdsk->id,"RDSK",4);
+    memcpy(rdsk->id,"RDSK",4);
     rdsk->size = sizeof(struct bRDSKblock)/sizeof(int32_t);
     rdsk->blockSize = LOGICAL_BLOCK_SIZE;
     rdsk->badBlockList = -1;
 
-    strncpy(rdsk->diskVendor,"ADFlib  ",8);
-    strncpy(rdsk->diskProduct,"harddisk.adf    ",16);
-    strncpy(rdsk->diskRevision,"v1.0",4);
+    memcpy(rdsk->diskVendor,"ADFlib  ",8);
+    memcpy(rdsk->diskProduct,"harddisk.adf    ",16);
+    memcpy(rdsk->diskRevision,"v1.0",4);
 
     memcpy(buf, rdsk, sizeof(struct bRDSKblock));
 #ifdef LITT_ENDIAN
@@ -838,7 +838,7 @@ adfWritePARTblock(struct Device *dev, int32_t nSect, struct bPARTblock* part)
 
     memset(buf,0,LOGICAL_BLOCK_SIZE);
 
-    strncpy(part->id,"PART",4);
+    memcpy(part->id,"PART",4);
     part->size = sizeof(struct bPARTblock)/sizeof(int32_t);
     part->blockSize = LOGICAL_BLOCK_SIZE;
     part->vectorSize = 16;
@@ -925,7 +925,7 @@ adfWriteFSHDblock(struct Device *dev, int32_t nSect, struct bFSHDblock* fshd)
 
     memset(buf,0,LOGICAL_BLOCK_SIZE);
 
-    strncpy(fshd->id,"FSHD",4);
+    memcpy(fshd->id,"FSHD",4);
     fshd->size = sizeof(struct bFSHDblock)/sizeof(int32_t);
 
     memcpy(buf, fshd, sizeof(struct bFSHDblock));
@@ -1008,7 +1008,7 @@ adfWriteLSEGblock(struct Device *dev, int32_t nSect, struct bLSEGblock* lseg)
 
     memset(buf,0,LOGICAL_BLOCK_SIZE);
 
-    strncpy(lseg->id,"LSEG",4);
+    memcpy(lseg->id,"LSEG",4);
     lseg->size = sizeof(struct bLSEGblock)/sizeof(int32_t);
 
     memcpy(buf, lseg, sizeof(struct bLSEGblock));
