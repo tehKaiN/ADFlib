@@ -57,6 +57,7 @@ target_include_directories(adf
 
 target_compile_definitions(adf PRIVATE
 	_XOPEN_SOURCE=500	# Need this for strdup with current glibc
+	$<$<AND:${WIN32},$<BOOL:${BUILD_SHARED_LIBS}>>: WIN32DLL>
 )
 
 target_compile_options(adf PRIVATE
