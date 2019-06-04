@@ -43,6 +43,7 @@
  */
 
 #ifdef WIN32
+#include <direct.h>
 #define DIRSEP '\\'
 #else
 #define DIRSEP '/'
@@ -53,7 +54,11 @@
 
 static void mkdirOrLogErr(const char *const path)
 {
+#ifdef WIN32
+	if (_mkdir(path))
+#else
 	if (mkdir(path, S_IRWXU | S_IRWXG | S_IRWXO))
+#endif
 		fprintf(stderr, "mkdir: cannot create directory '%s': %s\n",
 			path, strerror(errno));
 }
