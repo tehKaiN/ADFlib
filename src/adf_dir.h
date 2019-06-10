@@ -45,7 +45,7 @@ RETCODE adfCreateFile(struct Volume* vol, SECTNUM parent, char *name,
     struct bFileHeaderBlock *fhdr);
 PREFIX RETCODE adfCreateDir(struct Volume* vol, SECTNUM parent, char* name);
 SECTNUM adfCreateEntry(struct Volume *vol, struct bEntryBlock *dir, char *name, SECTNUM );
-PREFIX RETCODE adfRenameEntry(struct Volume *vol, SECTNUM, char *old,SECTNUM,char *new);
+PREFIX RETCODE adfRenameEntry(struct Volume *vol, SECTNUM, char *old,SECTNUM,char *neu);
 
 
 RETCODE adfReadEntryBlock(struct Volume* vol, SECTNUM nSect, struct bEntryBlock* ent);
