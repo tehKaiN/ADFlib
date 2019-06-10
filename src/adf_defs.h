@@ -38,10 +38,7 @@
 #define FALSE   0
 
 #include <stdint.h>
-#define ULONG   uint32_t
-#define USHORT  uint16_t
-#define UCHAR   uint8_t
-#define BOOL    int
+
 
 
 /* defines max and min */
